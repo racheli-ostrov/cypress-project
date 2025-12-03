@@ -1,0 +1,19 @@
+{
+  "name": "lastprice-cypress-tests",
+  "version": "1.0.0",
+  "description": "Cypress automation tests for LastPrice website",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:headed": "cypress run --headed",
+    "test": "cypress run"
+  },
+  "keywords": ["cypress", "automation", "testing"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.2"
+  }
+}

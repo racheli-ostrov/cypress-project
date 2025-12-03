@@ -1,0 +1,36 @@
+# Cypress Files
+node_modules/
+cypress/videos/
+cypress/screenshots/
+output/videos/
+output/screenshots/
+cypress/downloads/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Old Java/Maven files (keeping for reference but not tracking)
+target/
+.classpath
+.project
+.settings/
+*.class
+*.jar
+*.war
+*.iml
+.kotlin
