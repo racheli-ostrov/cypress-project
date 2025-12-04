@@ -10,10 +10,15 @@
     "cy:run:headed": "cypress run --headed",
     "test": "cypress run"
   },
-  "keywords": ["cypress", "automation", "testing"],
+  "keywords": [
+    "cypress",
+    "automation",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.6.2"
+    "cypress": "^15.7.1",
+    "xlsx": "^0.18.5"
   }
 }

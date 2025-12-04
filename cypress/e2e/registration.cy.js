@@ -56,6 +56,16 @@ describe('טסטים לטופס הרשמה - Registration Form Tests', () => {
     cy.wait(5000);
 
     cy.log('\n=== טסט 1 הסתיים בהצלחה ===');
+    
+    // דיווח לאקסל
+    cy.task('addRegistrationTest', {
+      'Test ID': 'REG-001',
+      'Description': 'הרשמה מוצלחת עם כל הפרטים',
+      'Input Data': `אימייל: ${testData.email}, שם: ${testData.firstName} ${testData.lastName}`,
+      'Expected': 'הרשמה מצליחה, כניסה למערכת',
+      'Actual': 'הרשמה הצליחה',
+      'Status': 'PASS ✓'
+    }, { log: false });
   });
 
   it('טסט 2: ניסיון הרשמה עם אימייל קיים', () => {
@@ -106,6 +116,16 @@ describe('טסטים לטופס הרשמה - Registration Form Tests', () => {
       });
 
     cy.log('\n=== טסט 2 הסתיים ===');
+    
+    // דיווח לאקסל
+    cy.task('addRegistrationTest', {
+      'Test ID': 'REG-002',
+      'Description': 'ניסיון הרשמה עם אימייל קיים',
+      'Input Data': `אימייל קיים: ${uniqueEmail}, שם: ${testData.firstName} ${testData.lastName}`,
+      'Expected': 'הצגת הודעת שגיאה - אימייל כבר קיים',
+      'Actual': 'הופיעה הודעת שגיאה',
+      'Status': 'PASS ✓'
+    }, { log: false });
   });
 
   it('טסט 3: אימות שדות חובה - אימייל וסיסמה ריקים', () => {
@@ -154,6 +174,16 @@ describe('טסטים לטופס הרשמה - Registration Form Tests', () => {
     cy.log('✓✓✓ נשארנו בעמוד ההרשמה - המערכת מנעה שליחה (כמצופה!)');
 
     cy.log('\n=== טסט 3 הסתיים ===');
+    
+    // דיווח לאקסל
+    cy.task('addRegistrationTest', {
+      'Test ID': 'REG-003',
+      'Description': 'אימות שדות חובה - אימייל וסיסמה ריקים',
+      'Input Data': 'אימייל: [ריק], סיסמה: [ריקה], שאר השדות: מלאים',
+      'Expected': 'המערכת מונעת שליחה, נשארים בעמוד ההרשמה',
+      'Actual': 'נשארנו בעמוד ההרשמה - שליחה נחסמה',
+      'Status': 'PASS ✓'
+    }, { log: false });
   });
 
   it('טסט 4: אימות טלפון עם אותיות', () => {
@@ -206,5 +236,15 @@ describe('טסטים לטופס הרשמה - Registration Form Tests', () => {
     cy.log('✓✓✓ נשארנו בעמוד ההרשמה - המערכת מנעה שליחה (כמצופה!)');
 
     cy.log('\n=== טסט 4 הסתיים ===');
+    
+    // דיווח לאקסל
+    cy.task('addRegistrationTest', {
+      'Test ID': 'REG-004',
+      'Description': 'אימות טלפון עם אותיות',
+      'Input Data': `טלפון 1: ${testData.phone1}, טלפון 2: ${testData.phone2} [עם אותיות!]`,
+      'Expected': 'המערכת מונעת שליחה עקב טלפון לא תקין',
+      'Actual': 'נשארנו בעמוד ההרשמה - שליחה נחסמה',
+      'Status': 'PASS ✓'
+    }, { log: false });
   });
 });

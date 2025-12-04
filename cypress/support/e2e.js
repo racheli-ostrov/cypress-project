@@ -8,6 +8,12 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// After all tests - generate Excel file
+after(() => {
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
+  cy.task('generateExcel', `TestResults_${timestamp}.xlsx`, { log: false });
+});
+
 // Hide fetch/XHR requests from command log for cleaner output
 const app = window.top;
 

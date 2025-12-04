@@ -108,23 +108,33 @@ class RegistrationPage {
       cy.wait(500);
     }
     
-    // City
+    // City - using force to bypass Select2 overlay
     if (data.city) {
-      this.citySelect.scrollIntoView().select(data.city);
+      this.citySelect.scrollIntoView().select(data.city, { force: true });
       cy.log(`✓ נבחרה עיר: ${data.city}`);
-      cy.wait(2000); // המתנה לאחר בחירת עיר
+      cy.wait(3000); // המתנה לאחר בחירת עיר - שדה הרחוב מתעדכן
     }
     
-    // Street
+    // Street - צריך להמתין שהשדה יהיה זמין לאחר בחירת העיר
     if (data.street) {
-      this.streetField.scrollIntoView().clear().type(data.street);
+      cy.wait(1000); // המתנה נוספת לפני מילוי הרחוב
+      this.streetField.scrollIntoView().should('be.visible').clear({ force: true }).type(data.street, { force: true, delay: 100 });
       cy.log(`✓ מולא רחוב: ${data.street}`);
-      cy.wait(2000); // המתנה לאימות הרחוב
+      cy.wait(2000); // המתנה שתפריט ההשלמה יופיע
+      
+      // סגירת תפריט ההשלמה האוטומטי - לחיצה על ESC או קליק במקום אחר
+      cy.get('body').type('{esc}'); // סגירת תפריט autocomplete
+      cy.wait(500);
+      
+      // לחלופין - לחיצה על כותרת הדף כדי לסגור את התפריט
+      cy.get('h1, h2').first().click({ force: true });
+      cy.wait(500);
     }
     
     // House number
     if (data.houseNumber) {
-      this.houseNumberField.scrollIntoView().clear().type(data.houseNumber);
+      cy.wait(500); // המתנה נוספת שהתפריט באמת ייסגר
+      this.houseNumberField.scrollIntoView().clear({ force: true }).type(data.houseNumber, { force: true });
       cy.log(`✓ מולא מספר בית: ${data.houseNumber}`);
       cy.wait(500);
     }
@@ -152,10 +162,13 @@ class RegistrationPage {
     
     // Phone 2
     if (data.phone2) {
-      this.phone2Field.scrollIntoView().clear().type(data.phone2);
+      this.phone2Field.scrollIntoView().clear({ force: true }).type(data.phone2, { force: true });
       cy.log(`✓ מולא טלפון נוסף: ${data.phone2}`);
       cy.wait(500);
     }
+    
+    cy.log("\n=== סיים למלא את כל השדות ===");
+    cy.wait(1000); // המתנה לפני המעבר לצ'קבוקסים
     
     // Checkboxes
     cy.log("\n=== מסמן צ׳קבוקסים ===");

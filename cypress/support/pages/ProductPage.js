@@ -26,8 +26,15 @@ class ProductPage {
   }
 
   setQuantity(quantity) {
-    this.quantityInput.clear().type(quantity.toString());
-    cy.wait(500);
+    // Try to find quantity input, if not found - skip (some products don't have quantity selector)
+    cy.get('body').then($body => {
+      if ($body.find('input[type="number"], input[name*="quantity"], .quantity-input').length > 0) {
+        this.quantityInput.clear().type(quantity.toString());
+        cy.wait(500);
+      } else {
+        cy.log('⚠ שדה כמות לא נמצא - ממשיך ללא שינוי כמות');
+      }
+    });
   }
 
   addToCart() {
