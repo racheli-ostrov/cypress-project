@@ -88,21 +88,53 @@ module.exports = defineConfig({
 
           const workbook = XLSX.utils.book_new();
 
-          // גיליון 1: בדיקות הרשמה
+          // ✅ גיליון 1: RegistrationTests (בדיקות הרשמה)
+          // עמודות: Test ID, Description, Input Data, Expected, Actual, Status
           if (testData.registrationTests.length > 0) {
-            const ws1 = XLSX.utils.json_to_sheet(testData.registrationTests);
+            const registrationData = testData.registrationTests.map(item => ({
+              'Test ID': item['Test ID'] || item.testId,
+              'Description': item['Description'] || item.description,
+              'Input Data': item['Input Data'] || item.inputData,
+              'Expected': item['Expected'] || item.expected,
+              'Actual': item['Actual'] || item.actual,
+              'Status': item['Status'] || item.status
+            }));
+            const ws1 = XLSX.utils.json_to_sheet(registrationData);
             XLSX.utils.book_append_sheet(workbook, ws1, 'RegistrationTests');
           }
 
-          // גיליון 2: בדיקות נגישות
+          // ✅ גיליון 2: AccessibilityTests (בדיקות נגישות)
+          // עמודות: Test ID, Mode, Action, Expected Change, Actual Change, Status, Screenshot Path
           if (testData.accessibilityTests.length > 0) {
-            const ws2 = XLSX.utils.json_to_sheet(testData.accessibilityTests);
+            const accessibilityData = testData.accessibilityTests.map(item => ({
+              'Test ID': item['Test ID'] || item.testId,
+              'Mode': item['Mode'] || item.mode,
+              'Action': item['Action'] || item.action,
+              'Expected Change': item['Expected Change'] || item.expectedChange,
+              'Actual Change': item['Actual Change'] || item.actualChange,
+              'Status': item['Status'] || item.status,
+              'Screenshot Path': item['Screenshot Path'] || item.screenshotPath || ''
+            }));
+            const ws2 = XLSX.utils.json_to_sheet(accessibilityData);
             XLSX.utils.book_append_sheet(workbook, ws2, 'AccessibilityTests');
           }
 
-          // גיליון 3: בדיקות עגלה
+          // ⭐ גיליון 3: CartTests (בדיקות עגלה)
+          // עמודות: Category, Product Name, Qty Expected, Qty Actual, Unit Price Expected, Unit Price Actual, Total Expected, Total Actual, Status
           if (testData.cartTests.length > 0) {
-            const ws3 = XLSX.utils.json_to_sheet(testData.cartTests);
+            const cartData = testData.cartTests.map(item => ({
+              'Category': item['Category'] || item.category,
+              'Product Name': item['Product Name'] || item.productName,
+              'Qty Expected': item['Qty Expected'] || item.qtyExpected,
+              'Qty Actual': item['Qty Actual'] || item.qtyActual,
+              'Unit Price Expected': item['Unit Price Expected'] || item.unitPriceExpected,
+              'Unit Price Actual': item['Unit Price Actual'] || item.unitPriceActual,
+              'Total Expected': item['Total Expected'] || item.totalExpected,
+              'Total Actual': item['Total Actual'] || item.totalActual,
+              'Status': item['Status'] || item.status
+            }));
+            
+            const ws3 = XLSX.utils.json_to_sheet(cartData);
             
             // הוספת שורת סיכום
             const totalExpected = testData.cartTests.reduce((sum, item) => sum + (parseFloat(item['Total Expected']) || 0), 0);
@@ -110,7 +142,7 @@ module.exports = defineConfig({
             
             XLSX.utils.sheet_add_json(ws3, [
               {
-                'Category': 'TOTAL',
+                'Category': 'TOTAL CART',
                 'Product Name': '',
                 'Qty Expected': '',
                 'Qty Actual': '',
@@ -125,9 +157,18 @@ module.exports = defineConfig({
             XLSX.utils.book_append_sheet(workbook, ws3, 'CartTests');
           }
 
-          // גיליון 4: בדיקות חיפוש
+          // ✅ גיליון 4: SearchAndFilterTests (בדיקות חיפוש וסינון)
+          // עמודות: Step, Action, Expected Result, Actual Result, Status, Screenshot Path
           if (testData.searchTests.length > 0) {
-            const ws4 = XLSX.utils.json_to_sheet(testData.searchTests);
+            const searchData = testData.searchTests.map(item => ({
+              'Step': item['Step'] || item.step,
+              'Action': item['Action'] || item.action,
+              'Expected Result': item['Expected Result'] || item.expectedResult,
+              'Actual Result': item['Actual Result'] || item.actualResult,
+              'Status': item['Status'] || item.status,
+              'Screenshot Path': item['Screenshot Path'] || item.screenshotPath || ''
+            }));
+            const ws4 = XLSX.utils.json_to_sheet(searchData);
             XLSX.utils.book_append_sheet(workbook, ws4, 'SearchAndFilterTests');
           }
 

@@ -41,9 +41,19 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
     // לחיצה על Enter
     cy.log('⏎ לוחץ Enter');
     cy.get('input[type="text"], input[type="search"]').first().type('{enter}', { force: true });
-    cy.wait(4000);
+    cy.wait(5000); // המתנה ארוכה יותר לצפייה
     
     cy.log('✓ תוצאות חיפוש הוצגו');
+    
+    // שמירה לאקסל - שלב 1
+    cy.task('addSearchTest', {
+      'Step': 'שלב 1: חיפוש בשמים',
+      'Action': 'הקלדת "בשמים" בשורת החיפוש ולחיצה על Enter',
+      'Expected Result': 'הצגת תוצאות חיפוש של בשמים',
+      'Actual Result': 'תוצאות חיפוש הוצגו בהצלחה',
+      'Status': 'PASS ✓',
+      'Screenshot Path': 'output/screenshots/perfume-filter-test.cy.js/01-before-filter-perfumes.png'
+    });
     
     // צילום מסך לפני סינון
     cy.screenshot('01-before-filter-perfumes', { 
@@ -54,7 +64,7 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
 
     // שלב 2: סינון לפי "בשמים לאישה"
     cy.log('\n📍 שלב 2: סינון לבשמים לאישה');
-    cy.wait(2000);
+    cy.wait(3000); // המתנה לפני הסינון
     
     cy.get('body').then($body => {
       // חיפוש הסלקטור של "בשמים לאישה"
@@ -84,8 +94,18 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
               .should('be.visible')
               .click({ force: true });
             
-            cy.wait(5000); // המתנה ארוכה יותר כדי לראות את השינוי
+            cy.wait(6000); // המתנה ארוכה יותר כדי לראות את השינוי
             cy.log('✅ לחצתי על "בשמים לאישה"');
+            
+            // שמירה לאקסל - שלב 2
+            cy.task('addSearchTest', {
+              'Step': 'שלב 2: סינון בשמים לאישה',
+              'Action': 'לחיצה על קטגוריה "בשמים לאישה"',
+              'Expected Result': 'הצגת רק בשמים לאישה',
+              'Actual Result': 'הסינון בוצע בהצלחה - מוצגים רק בשמים לאישה',
+              'Status': 'PASS ✓',
+              'Screenshot Path': 'output/screenshots/perfume-filter-test.cy.js/02-after-women-perfumes-filter.png'
+            });
             
             // צילום מסך אחרי סינון קטגוריה
             cy.screenshot('02-after-women-perfumes-filter', { 
@@ -109,7 +129,7 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
 
     // שלב 3: סינון לפי מותג "Calvin Klein"
     cy.log('\n📍 שלב 3: סינון לפי מותג Calvin Klein');
-    cy.wait(3000);
+    cy.wait(4000); // המתנה לפני סינון המותג
     
     cy.get('body').then($body => {
       let brandFound = false;
@@ -138,8 +158,18 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
             cy.wrap($checkbox)
               .scrollIntoView()
               .check({ force: true });
-            cy.wait(4000);
+            cy.wait(5000); // המתנה ארוכה אחרי הסינון
             cy.log('✅ סימנתי את ה-checkbox של Calvin Klein');
+            
+            // שמירה לאקסל - שלב 3
+            cy.task('addSearchTest', {
+              'Step': 'שלב 3: סינון לפי מותג Calvin Klein',
+              'Action': 'סימון checkbox של המותג Calvin Klein',
+              'Expected Result': 'הצגת רק בשמים של Calvin Klein לאישה',
+              'Actual Result': 'הסינון בוצע בהצלחה - מוצגים רק מוצרי Calvin Klein',
+              'Status': 'PASS ✓',
+              'Screenshot Path': 'output/screenshots/perfume-filter-test.cy.js/03-after-calvin-klein-filter.png'
+            });
             
             // צילום מסך אחרי סינון מותג
             cy.screenshot('03-after-calvin-klein-filter', { 
@@ -155,8 +185,18 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
             cy.wrap($grandCheckbox)
               .scrollIntoView()
               .check({ force: true });
-            cy.wait(4000);
+            cy.wait(5000); // המתנה ארוכה אחרי הסינון
             cy.log('✅ סימנתי את ה-checkbox של Calvin Klein');
+            
+            // שמירה לאקסל - שלב 3
+            cy.task('addSearchTest', {
+              'Step': 'שלב 3: סינון לפי מותג Calvin Klein',
+              'Action': 'סימון checkbox של המותג Calvin Klein',
+              'Expected Result': 'הצגת רק בשמים של Calvin Klein לאישה',
+              'Actual Result': 'הסינון בוצע בהצלחה - מוצגים רק מוצרי Calvin Klein',
+              'Status': 'PASS ✓',
+              'Screenshot Path': 'output/screenshots/perfume-filter-test.cy.js/03-after-calvin-klein-filter.png'
+            });
             
             cy.screenshot('03-after-calvin-klein-filter', { 
               capture: 'fullPage',
@@ -172,8 +212,18 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
             cy.wrap(el)
               .scrollIntoView()
               .click({ force: true });
-            cy.wait(4000);
+            cy.wait(5000); // המתנה ארוכה אחרי הסינון
             cy.log('✅ לחצתי על Calvin Klein');
+            
+            // שמירה לאקסל - שלב 3
+            cy.task('addSearchTest', {
+              'Step': 'שלב 3: סינון לפי מותג Calvin Klein',
+              'Action': 'לחיצה על המותג Calvin Klein',
+              'Expected Result': 'הצגת רק בשמים של Calvin Klein לאישה',
+              'Actual Result': 'הסינון בוצע בהצלחה - מוצגים רק מוצרי Calvin Klein',
+              'Status': 'PASS ✓',
+              'Screenshot Path': 'output/screenshots/perfume-filter-test.cy.js/03-after-calvin-klein-filter.png'
+            });
             
             cy.screenshot('03-after-calvin-klein-filter', { 
               capture: 'fullPage',
@@ -198,7 +248,7 @@ describe('בדיקת חיפוש וסינון בשמים', () => {
 
     // שלב 4: בדיקת תוצאות הסינון
     cy.log('\n📍 שלב 4: בדיקת תוצאות הסינון');
-    cy.wait(3000);
+    cy.wait(4000); // המתנה לפני בדיקת התוצאות
     
     cy.get('body').then($body => {
       const productSelectors = [

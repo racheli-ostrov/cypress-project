@@ -59,7 +59,7 @@ npm run cy:run:headed
 
 ## 📝 הטסטים
 
-### טסטי הרשמה (`registration.cy.js`)
+### טסטי הרשמה (`registration-test.cy.js`)
 1. **הרשמה מוצלחת** - מילוי טופס הרשמה עם כל הפרטים הנדרשים
 2. **אימייל כפול** - בדיקה שהמערכת מונעת רישום עם אימייל קיים
 3. **שדות חובה** - בדיקה שהמערכת מונעת שליחה עם שדות חובה ריקים
